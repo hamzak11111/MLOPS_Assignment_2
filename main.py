@@ -6,6 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import pandas as pd
+import os
 
 default_args = {
     'owner': 'airflow',
@@ -35,7 +36,16 @@ def data_transformation(ti):
     df.to_csv('transformed_data.csv', index=False)
 
 def store_data():
-    pass
+    csv_file = 'transformed_data.csv'
+    dvc_repo_dir = 'dvc_folder'
+    dvc_data_dir = os.path.join(dvc_repo_dir, 'data')
+    os.makedirs(dvc_data_dir, exist_ok=True)
+    dvc_file_path = os.path.join(dvc_data_dir, csv_file)
+    os.rename(csv_file, dvc_file_path)
+    os.chdir(dvc_repo_dir)
+    os.system('dvc add ' + dvc_file_path)
+    os.system('dvc commit')
+    os.system('dvc push')
 
 with DAG(
     'data_extraction_pipeline',
