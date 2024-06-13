@@ -35,10 +35,6 @@ This project involves automating data extraction, transformation, and storage us
    - Challenge: Integrating DVC commands directly into the Airflow DAG posed issues with environment and path configurations.
    - Solution: Created a separate script for DVC operations and called it from the Airflow task using system commands.
 
-4. **Google Drive Authentication**:
-   - Challenge: Managing and securely storing Google Drive authentication credentials.
-   - Solution: Used environment variables and Airflow's secret management to handle credentials more securely.
-
 ## Conclusion
 
 This project showcased the powerful capabilities of automating complex workflows with Apache Airflow, alongside the robust data versioning features of DVC. Despite the challenges, the solutions implemented provided a reliable and scalable system for data processing tasks.
