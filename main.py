@@ -46,6 +46,9 @@ def store_data():
     os.system('dvc add ' + dvc_file_path)
     os.system('dvc commit')
     os.system('dvc push')
+    os.system('git add .')
+    os.system('git commit -m "changes committed"')
+    os.system('git push origin main')
 
 with DAG(
     'data_extraction_pipeline',
